@@ -23,4 +23,5 @@ def index(request):
 
 def detail(request, id):
     product_object = Products.objects.get(id=id)
-    return render(request, 'shop/detail.html', {'product_objects': product_object})
+    print(product_object)
+    return render(request, 'shop/detail.html', {'product_object': product_object})
