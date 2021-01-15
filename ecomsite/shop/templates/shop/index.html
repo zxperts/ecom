@@ -46,7 +46,8 @@
                             <a class="nav-link" href="#">Features</a>
                         </li>
                         <li class="nav-item">
-                            <button id="cart" data-html="true" type="button" class="btn btn-secondary" data-container="body" data-toggle="popover"
+                            <button id="cart" data-html="true" type="button" class="btn btn-secondary"
+                                    data-container="body" data-toggle="popover"
                                     data-placement="bottom" data-content="Vivamus
 sagittis lacus vel augue laoreet rutrum faucibus.">
                                 Cart(0)
@@ -85,9 +86,8 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
                 <img src="{{ product.image }}" class="card-img-top">
                 <div class="card-body">
                     <div id="nm{{product.id}}" class="card-title">{{ product.title }}</div>
-                    <div class="card-text">
-                        $ {{ product.price }}
-                    </div>
+                    <div id="price{{product.id}}" class="text">{{ product.price }}</div>
+                    <div class="card-text">{{ product.price }}</div>
                     <a href="/{{product.id}}" class="btn btn-warning">View</a>
                     <button id="{{product.id}}" class="btn atc btn-warning">Add to card</button>
                 </div>
@@ -140,11 +140,13 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
         if (cart[item_id]!=undefined){
             quantity = cart[item_id][0]+1;
             cart[item_id][0]=quantity;
+            cart[item_id][2]=cart[item_id][2]+parseFloat(document.getElementById("price"+item_id).innerHTML);
         }
         else {
             quantity=1;
+            price=parseFloat(document.getElementById("price"+item_id).innerHTML);
             name=document.getElementById("nm"+item_id).innerHTML ;
-            cart[item_id]=[quantity,name];
+            cart[item_id]=[quantity,name,price];
 
         }
         console.log(cart);
@@ -176,6 +178,7 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
         document.getElementById("cart").setAttribute('data-content',cartString);
         $('[data-toggle="popover"]').popover();
     }
+
 
 
 
